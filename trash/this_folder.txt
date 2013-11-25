@@ -1,0 +1,1 @@
+# this folder store removed chats, and you can delete everything here when you want.
