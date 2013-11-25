@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# ---------------------------------------------
+# Configuration
+
+# each room will be created as a subdirectory, inside
+# this directory
+ROOMS_ROOT="/home/paulera/public_html/chat"
+
+# directory where the chatcreator files atre located
+CHATCREATOR_ROOT="/home/paulera/workspace/seedchat"
+
+# ---------------------------------------------
+
+if [ -z $1 ] || [ "$1" == "--help" ] || [ "$1" == "-help" ]; then
+	echo "Usage: createroom <room-name>"
+	echo ""
+	echo "this command will create the url"
+	echo "/chat/room-name"
+	echo "which will be your webchat room"
+	echo ""
+	exit 1;
+fi
+
+FOLDER=$ROOMS_ROOT"/$1"
+if [ -d $FOLDER ] || [ -f $FOLDER ]; then
+	echo "The room already exists!"
+	echo "Creation aborted"
+	echo ""
+	exit 1;
+fi
+
+echo "Creating the room "$1"... "
+mkdir -p $FOLDER
+chmod g+w $FOLDER
+
+if [ ! -d $FOLDER ]; then
+	echo "Tryed, but could not create the room"
+	echo ""
+	exit 1;
+fi
+
+# Create deploy links
+
+function link() {
+	ln -s $CHATCREATOR_ROOT/common/$1 $FOLDER/$1
+}
+
+link index.html
+link Log.php
+link PHPTail.php
+link sender.html
+link sendmessage.php
+
+# create empty chat log
+
+touch $FOLDER"/chat.html"
+chmod -R g+w $FOLDER

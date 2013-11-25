@@ -1,0 +1,84 @@
+<html>
+
+	<head>
+		<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/flick/jquery-ui.css" rel="stylesheet"></link>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+		<script>
+			function manda() {
+				var u=$("#username").val();
+				var m=$("#message").val();
+				$.ajax({
+					type:"GET",
+					url:"sendmessage.php",
+					data:"username="+u+"&message="+m
+				});
+
+				$("#message").val("");
+				$("#message").focus();
+			}
+		</script>
+
+		<style>
+			body {
+			  padding: 0px;
+			  margin: 0px;
+			  background: #000000;
+			  border-top: solid 1px #606060 ! important;
+			}
+		
+			.textfield {
+			   border: hidden 0px;
+			   outline: none;
+			   font-family: "Lucida Console", Monaco, monospace;
+			   background: #000000;
+			   margin: 0px;
+			   padding: 0px;
+			}
+
+			#username {
+			   border-right: solid 1px #606060;
+			   color: #00dd00;
+			   height: 30px;
+			   width: 100px;
+			}
+
+			#message {
+			   color: #cccccc;
+			   width: 100%;
+			   padding-left: 5px ! important;
+			}
+
+			#send {
+			   margin :0px;
+			   background: #ff8000;
+			   color: #000000;
+			   border: hidden 0px;
+			   margin: 0px;
+			   height: 30px;
+			   float: right;
+			}
+
+			#send:hover {
+			  background-color:#ffbb00;
+			  cursor: pointer;
+			}
+
+			.tdusername { width: 100px; }
+			.tdsend { width: 40px; }
+		</style>
+
+	</head>
+
+	<body>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td class="tdusername"><input type="text" name="username" id="username" class="textfield" /></td>
+				<td class="tdmessage"><input type="text" name="message" id="message" class="textfield" onKeyPress="if(event.keyCode==13) manda();"/></td>
+				<td class="tdsend"><input type="button" name="send" value="send" id="send" onClick='manda();'/></td>
+			</tr>
+		</table>
+
+		</div>
+	</body>
+</html>

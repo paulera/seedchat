@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# ---------------------------------------------
+# Configuration
+
+# each room will be created as a subdirectory, inside
+# this directory
+ROOMS_ROOT="/home/paulera/public_html/chat"
+
+# directory where the chatcreator files atre located
+CHATCREATOR_ROOT="/home/paulera/workspace/seedchat"
+
+# ---------------------------------------------
+
+if [ -z $1 ] || [ "$1" == "--help" ] || [ "$1" == "-help" ]; then
+	echo "Usage: removeroom <room-name>"
+	echo ""
+	echo "this command will remove the folder"
+	echo "/chat/room-name"
+	echo ""
+	exit 1;
+fi
+
+FOLDER=$ROOMS_ROOT"/$1"
+if [ ! -d $FOLDER ]; then
+	echo "The folder does not exists!"
+	echo "Room remove aborted"
+	echo ""
+	exit 1;
+fi
+
+TRASH_ROOT=$CHATCREATOR_ROOT"/trash/"
+TRASHED=$TRASH_ROOT"/$1_"$(date +"%Y%m%d_%H%M%S")
+
+echo "Removing room "$1
+mv $FOLDER $TRASHED
+
+if [ -d $FOLDER ]; then
+	echo "Could not remove the room"
+	echo ""
+	exit 1;
+fi
+
+ls -1 $TRASHED | while read f; do
+	ARQ=$TRASHED"/"$f;
+	if [ -h $ARQ ]; then
+		unlink $ARQ;
+	fi;
+done
+
