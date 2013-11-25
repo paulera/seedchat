@@ -5,6 +5,8 @@ The aim of this project is to provide an encrypted chat, with a very easy instal
                                                                                                                                                                                                              
 If you want to try as it is, here are some instructions. You may need to edit some scripts and/or adjust some permissioning stuff.
 
+![chat](http://www.paulodev.com.br/images/seedchat/chat.png "yet another ready to use chat")
+
 ### Usage 1: Damn simple install ###
 
 Create a folder inside your web hosting, and put there all files from [commons folder](https://github.com/paulera/seedchat/tree/master/common).
@@ -37,6 +39,8 @@ IMPORTANT: use absolute path, without the '~' symbol
 #### Usage ####
 
 ##### Enable room manager #####
+
+![rooms-manager](http://www.paulodev.com.br/images/seedchat/rooms-manager.png "Rooms manager")
 
 Place a link inside the **public_html/chat** folder pointing to *workspace/seedchat/link_me_index.php*, this way:
 ```bash
